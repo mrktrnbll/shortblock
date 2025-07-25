@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import IonIcons from '@react-native-vector-icons/ionicons';
@@ -18,32 +19,58 @@ export default function AppNavigator() {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
-            headerShown: false,
-            tabBarStyle: {
-              backgroundColor: '#1e1e1e',
-              borderTopWidth: 0,
-              height: 70,
-              paddingBottom: 10,
-              paddingTop: 10,
-            },
-            tabBarActiveTintColor: '#4ADE80',
-            tabBarInactiveTintColor: '#94A3B8',
-            tabBarIcon: ({ color, size }) => {
-              let iconName: string;
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            borderTopWidth: 1,
+            paddingTop: 3,
+          },
+          tabBarItemStyle: {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          tabBarIconContainerStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+          },
+          tabBarActiveTintColor: '#164349ff',
+          tabBarInactiveTintColor: '#000000ff',
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-              if (route.name === 'Home') {
-                iconName = 'home-outline';
-              } else if (route.name === 'Settings') {
-                iconName = 'settings-outline';
-              } else if (route.name === 'Logs') {
-                iconName = 'archive-outline';
-              } else {
-                iconName = 'help-outline';
-              }
+            if (route.name === 'Home') {
+              iconName = 'home-outline';
+            } else if (route.name === 'Settings') {
+              iconName = 'settings-outline';
+            } else if (route.name === 'Logs') {
+              iconName = 'archive-outline';
+            } else {
+              iconName = 'help-outline';
+            }
 
-              return <IonIcons name={iconName} size={size} color={color} />;
-            },
-          })}
+            const iconWrapperSize = size + 28;
+
+            return (
+                  <View
+                    style={{
+                      width: iconWrapperSize,
+                      height: iconWrapperSize / 1.5,
+                      borderRadius: iconWrapperSize / 2,
+                      backgroundColor: focused ? '#9dced49f' : 'transparent',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <IonIcons
+                      name={iconName}
+                      size={size}
+                      color={focused ? '#164349ff' : color}
+                    />
+                  </View>
+            );
+          },
+        })}
         >
           <Tab.Screen name="Logs" component={LogScreen} />
           <Tab.Screen name="Home" component={HomeScreen} />
