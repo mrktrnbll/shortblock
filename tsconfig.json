@@ -1,0 +1,21 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@screens/*": ["screens/*"],
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "target": "esnext",
+    "module": "NodeNext",
+    "jsx": "react",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["react", "react-native"]
+  }
+}
